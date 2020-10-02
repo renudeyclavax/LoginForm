@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<form>
+        <input type="text" name="UserName" value="" />
+        <input type="text" name="Password" value="" />
+
+        <button class="btn btn-primary" >Submit</button>
+    </form>*@
+
+<form id="account" method="post" action="/Home/FormsTestPost">
+    <label for="txtName">Your name:</label>
+    <input type="text" id="UserName" name="UserName" />
+
+    <label for="txtAge">Your age:</label>
+    <input type="text" id="Password" name="Password" />
+
+    <button type="submit">Submit</button>
+</form>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+
+
+    let secretKey = '';
+    secretKey = `-----BEGIN PUBLIC KEY-----
+MIIBIDANBgkqhkiG9w0BAQEFAAOCAQ0AMIIBCAKCAQEAhOu3xWulRg2UksMsQGQm
+TTMg0BTZeOQslvzuQV0+dVoBqieMet0gyGcOi5Yj070Gpmv1zPfZ0WWC5OWs/bOM
+WUUvmK2SvoOCfPIEmfTnK1x8ah5XLoloivVAUaKPEVYmLiWnQQ52aMLBdibG+0E0
+s+X5P2KKcClhpAKjUUCO+qwJHIHCf37W/++aqUM1c/xVyBA32HBIkFdUYjOivQkH
+B+dG5KchW45DkhcG0OZ4VttvbvN5EwpJHKis6Yl1tZk5kacVaXGiuAuJucXvfoLG
+vKKvh4ZLEj3wg7WhsTODhUt2pPmlHBbT5ji0Yc8Gm8MfVapJG/Ms+PMbiEuFvx1S
+HwIBJQ==
+-----END PUBLIC KEY-----`;
+    $(document).ready(function () {
+        var pass = "";
+        //$("#password").keyup(function () {
+        //    let RSAEncrypt = new JSEncrypt();
+        //    RSAEncrypt.setPublicKey(secretKey);
+        //    pass = RSAEncrypt.encrypt($("#password").val());
+        //});
+
+        $('#account').submit(function (event) {
+            encryt();
+            this.submit();
+        });
+    });
+
+    function encryt(pass) {
+        var encrypt = new JSEncrypt();
+        encrypt.setPublicKey(secretKey);
+        pass = encrypt.encrypt($("#Password").val());
+        $("#Password").val(pass);
+    }
+
+</script>
